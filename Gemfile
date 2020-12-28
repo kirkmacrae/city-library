@@ -22,6 +22,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#bootstrap
+gem 'bootstrap', '~> 4.5', '>= 4.5.3'
+
 # authentication
 gem 'devise', '~> 4.2'
 
