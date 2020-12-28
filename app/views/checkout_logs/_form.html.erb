@@ -1,0 +1,52 @@
+<%= form_with(model: checkout_log, local: true) do |form| %>
+  <% if checkout_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(checkout_log.errors.count, "error") %> prohibited this checkout_log from being saved:</h2>
+
+      <ul>
+        <% checkout_log.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :UserId %>
+    <%= form.number_field :UserId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BookId %>
+    <%= form.number_field :BookId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :CheckoutDate %>
+    <%= form.datetime_select :CheckoutDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :DueDate %>
+    <%= form.datetime_select :DueDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ReturnedDate %>
+    <%= form.datetime_select :ReturnedDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <%= form.text_field :book_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

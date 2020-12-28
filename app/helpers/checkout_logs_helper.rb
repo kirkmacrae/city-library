@@ -1,0 +1,2 @@
+module CheckoutLogsHelper
+end

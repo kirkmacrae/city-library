@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Checkout Logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Userid</th>
+      <th>Bookid</th>
+      <th>Checkoutdate</th>
+      <th>Duedate</th>
+      <th>Returneddate</th>
+      <th>User</th>
+      <th>Book</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkout_logs.each do |checkout_log| %>
+      <tr>
+        <td><%= checkout_log.UserId %></td>
+        <td><%= checkout_log.BookId %></td>
+        <td><%= checkout_log.CheckoutDate %></td>
+        <td><%= checkout_log.DueDate %></td>
+        <td><%= checkout_log.ReturnedDate %></td>
+        <td><%= checkout_log.user_id %></td>
+        <td><%= checkout_log.book_id %></td>
+        <td><%= link_to 'Show', checkout_log %></td>
+        <td><%= link_to 'Edit', edit_checkout_log_path(checkout_log) %></td>
+        <td><%= link_to 'Destroy', checkout_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Checkout Log', new_checkout_log_path %>

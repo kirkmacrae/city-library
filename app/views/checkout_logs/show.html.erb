@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @checkout_log.UserId %>
+</p>
+
+<p>
+  <strong>Bookid:</strong>
+  <%= @checkout_log.BookId %>
+</p>
+
+<p>
+  <strong>Checkoutdate:</strong>
+  <%= @checkout_log.CheckoutDate %>
+</p>
+
+<p>
+  <strong>Duedate:</strong>
+  <%= @checkout_log.DueDate %>
+</p>
+
+<p>
+  <strong>Returneddate:</strong>
+  <%= @checkout_log.ReturnedDate %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @checkout_log.user_id %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @checkout_log.book_id %>
+</p>
+
+<%= link_to 'Edit', edit_checkout_log_path(@checkout_log) %> |
+<%= link_to 'Back', checkout_logs_path %>
