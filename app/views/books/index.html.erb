@@ -24,14 +24,18 @@
         <td><%= book.subgenre %></td>
         <td><%= book.pages %></td>
         <td><%= book.publisher %></td>        
-        <td><%= link_to 'Borrow', my_books_return_path %></td>        
+        <td><%= link_to 'Borrow', my_books_return_path %></td>
+        <% if current_user.try(:admin?) %>        
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add Copy', '/' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% if current_user.try(:admin?) %>   
 <%= link_to 'New Book', new_book_path %>
+<% end %>
