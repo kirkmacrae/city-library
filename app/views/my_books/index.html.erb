@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Books</h1>
+<h1>My Books</h1>
 
 <table>
   <thead>
@@ -11,7 +11,8 @@
       <th>Subgenre</th>
       <th>Pages</th>
       <th>Publisher</th>      
-      <th colspan="3"></th>
+      <th>DueDate</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -23,15 +24,12 @@
         <td><%= book.genre %></td>
         <td><%= book.subgenre %></td>
         <td><%= book.pages %></td>
-        <td><%= book.publisher %></td>        
-        <td><%= link_to 'Borrow', my_books_return_path %></td>        
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= book.publisher %></td>
+        <td><%= book.DueDate %></td>          
+        <td><%= link_to 'Return', my_books_return %></td>        
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Book', new_book_path %>

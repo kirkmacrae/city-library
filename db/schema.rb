@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 2020_12_28_033912) do
   end
 
   create_table "checkout_logs", force: :cascade do |t|
-    t.integer "UserId"
-    t.integer "BookId"
     t.datetime "CheckoutDate"
     t.datetime "DueDate"
     t.datetime "ReturnedDate"

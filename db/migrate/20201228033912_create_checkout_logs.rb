@@ -1,8 +1,6 @@
 class CreateCheckoutLogs < ActiveRecord::Migration[6.0]
   def change
     create_table :checkout_logs do |t|
-      t.integer :UserId
-      t.integer :BookId
       t.datetime :CheckoutDate
       t.datetime :DueDate
       t.datetime :ReturnedDate

@@ -1,8 +1,14 @@
-Rails.application.routes.draw do
-  resources :checkout_logs
+Rails.application.routes.draw do    
   devise_for :users
+  
+  get 'my_books/index'
+  get 'my_books/borrow'
+  get 'my_books/return'
+  
   get 'home/index'
-  resources :books
+  resources :books do
+    resources :checkout_logs
+  end
 
   root to: "home#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

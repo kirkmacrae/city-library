@@ -69,6 +69,6 @@ class CheckoutLogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def checkout_log_params
-      params.require(:checkout_log).permit(:UserId, :BookId, :CheckoutDate, :DueDate, :ReturnedDate, :user_id, :book_id)
+      params.require(:checkout_log).permit(:CheckoutDate, :DueDate, :ReturnedDate, :user_id, :book_id)
     end
 end
