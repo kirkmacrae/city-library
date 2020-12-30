@@ -4,7 +4,9 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    #TODO: display only unique books and also include number of copies of them
+    # @books = Book.select(all).distinct
+    @books = Book.find(:all, :group => [:title, :author, :genre, :subgenre, :pages, :publisher], :having => "count(*) > 1" )
   end
 
   # GET /books/1
