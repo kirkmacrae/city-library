@@ -3,10 +3,21 @@ class BooksController < ApplicationController
 
   # GET /books
   # GET /books.json
-  def index
-    #TODO: display only unique books and also include number of copies of them
-    # @books = Book.select(all).distinct
-    @books = Book.find(:all, :group => [:title, :author, :genre, :subgenre, :pages, :publisher], :having => "count(*) > 1" )
+  def index    
+    @books = Book.all
+  end
+
+  # a list of all unique books
+  # GET /books/listing
+  def listing
+    #TODO: substract number of books that haven't been returned yet from 'copies' to get number of available books
+    @books = Book.select(
+      [
+        :title, :author, :genre, :subgenre, :pages, :publisher, :book_number, Book.arel_table[:book_number].count.as('copies')
+      ]
+    ).group(
+      :book_number, :title, :author, :genre, :subgenre, :pages, :publisher
+    )
   end
 
   # GET /books/1
@@ -71,6 +82,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author, :genre, :subgenre, :pages, :publisher)
+      params.require(:book).permit(:title, :author, :genre, :subgenre, :pages, :publisher,:book_number)
     end
 end
