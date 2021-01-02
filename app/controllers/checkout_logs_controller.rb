@@ -1,20 +1,21 @@
 class CheckoutLogsController < ApplicationController
+  before_action :get_book
   before_action :set_checkout_log, only: [:show, :edit, :update, :destroy]
 
   # GET /checkout_logs
   # GET /checkout_logs.json
   def index
-    @checkout_logs = CheckoutLog.all
+    @checkout_logs = @book.checkout_logs
   end
 
   # GET /checkout_logs/1
   # GET /checkout_logs/1.json
-  def show
+  def show    
   end
 
   # GET /checkout_logs/new
   def new
-    @checkout_log = CheckoutLog.new
+    @checkout_log = @book.checkout_logs.build
   end
 
   # GET /checkout_logs/1/edit
@@ -62,13 +63,17 @@ class CheckoutLogsController < ApplicationController
   end
 
   private
+    #get book associated with this checkout_log
+    def get_book
+      @book = Book.find(params[:book_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_checkout_log
-      @checkout_log = CheckoutLog.find(params[:id])
+      @checkout_log = @book.checkout_logs.find(params[:id])      
     end
 
     # Only allow a list of trusted parameters through.
     def checkout_log_params
-      params.require(:checkout_log).permit(:CheckoutDate, :DueDate, :ReturnedDate, :user_id, :book_id)
+      params.require(:checkout_log).permit(:checkout_date, :due_date, :returned_date, :user_id, :book_id)
     end
 end

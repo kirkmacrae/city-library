@@ -3,17 +3,17 @@
 one:
   UserId: 1
   BookId: 1
-  CheckoutDate: 2020-12-27 22:39:12
-  DueDate: 2020-12-27 22:39:12
-  ReturnedDate: 2020-12-27 22:39:12
+  checkout_date: 2020-12-27 22:39:12
+  due_date: 2020-12-27 22:39:12
+  returned_date: 2020-12-27 22:39:12
   user: one
   book: one
 
 two:
   UserId: 1
   BookId: 1
-  CheckoutDate: 2020-12-27 22:39:12
-  DueDate: 2020-12-27 22:39:12
-  ReturnedDate: 2020-12-27 22:39:12
+  checkout_date: 2020-12-27 22:39:12
+  due_date: 2020-12-27 22:39:12
+  returned_date: 2020-12-27 22:39:12
   user: two
   book: two

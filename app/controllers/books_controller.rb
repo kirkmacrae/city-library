@@ -50,6 +50,13 @@ class BooksController < ApplicationController
     end
   end
 
+  def borrow
+    # TODO:
+    # 1. take first book with book_number that is still available
+    # 2. create new entry in checkoutlog table with that book_id and user_id of current_user
+    redirect_to books_listing_url
+  end
+
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update

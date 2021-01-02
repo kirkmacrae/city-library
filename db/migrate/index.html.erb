@@ -15,16 +15,16 @@
   </thead>
 
   <tbody>
-    <% Array(@checkout_logs).each do |checkout_log| %>
+    <% @checkout_logs.each do |checkout_log| %>
       <tr>
         <td><%= checkout_log.user_id %></td>
         <td><%= checkout_log.book_id %></td>
         <td><%= checkout_log.checkout_date %></td>
         <td><%= checkout_log.due_date %></td>
         <td><%= checkout_log.returned_date %></td>        
-        <td><%= link_to 'Show', book_checkout_log_path(@book, checkout_log) %></td>
-        <td><%= link_to 'Edit', edit_book_checkout_log_path(@book, checkout_log) %></td>
-        <td><%= link_to 'Destroy', book_checkout_log_path(@book, checkout_log), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', book_checkout_log %></td>
+        <td><%= link_to 'Edit', edit_book_checkout_log_path(checkout_log) %></td>
+        <td><%= link_to 'Destroy', book_checkout_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,5 +33,3 @@
 <br>
 
 <%= link_to 'New Checkout Log', new_book_checkout_log_path %>
-
-<%= link_to 'Back', books_path %>

@@ -15,9 +15,9 @@ class CheckoutLogsTest < ApplicationSystemTestCase
     click_on "New Checkout Log"
 
     fill_in "Bookid", with: @checkout_log.BookId
-    fill_in "Checkoutdate", with: @checkout_log.CheckoutDate
-    fill_in "Duedate", with: @checkout_log.DueDate
-    fill_in "Returneddate", with: @checkout_log.ReturnedDate
+    fill_in "checkout_date", with: @checkout_log.checkout_date
+    fill_in "due_date", with: @checkout_log.due_date
+    fill_in "returned_date", with: @checkout_log.returned_date
     fill_in "Userid", with: @checkout_log.UserId
     fill_in "Book", with: @checkout_log.book_id
     fill_in "User", with: @checkout_log.user_id
@@ -32,9 +32,9 @@ class CheckoutLogsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Bookid", with: @checkout_log.BookId
-    fill_in "Checkoutdate", with: @checkout_log.CheckoutDate
-    fill_in "Duedate", with: @checkout_log.DueDate
-    fill_in "Returneddate", with: @checkout_log.ReturnedDate
+    fill_in "checkout_date", with: @checkout_log.checkout_date
+    fill_in "due_date", with: @checkout_log.due_date
+    fill_in "returned_date", with: @checkout_log.returned_date
     fill_in "Userid", with: @checkout_log.UserId
     fill_in "Book", with: @checkout_log.book_id
     fill_in "User", with: @checkout_log.user_id

@@ -17,7 +17,7 @@ class CheckoutLogsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create checkout_log" do
     assert_difference('CheckoutLog.count') do
-      post checkout_logs_url, params: { checkout_log: { BookId: @checkout_log.BookId, CheckoutDate: @checkout_log.CheckoutDate, DueDate: @checkout_log.DueDate, ReturnedDate: @checkout_log.ReturnedDate, UserId: @checkout_log.UserId, book_id: @checkout_log.book_id, user_id: @checkout_log.user_id } }
+      post checkout_logs_url, params: { checkout_log: { BookId: @checkout_log.BookId, checkout_date: @checkout_log.checkout_date, due_date: @checkout_log.due_date, returned_date: @checkout_log.returned_date, UserId: @checkout_log.UserId, book_id: @checkout_log.book_id, user_id: @checkout_log.user_id } }
     end
 
     assert_redirected_to checkout_log_url(CheckoutLog.last)
@@ -34,7 +34,7 @@ class CheckoutLogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update checkout_log" do
-    patch checkout_log_url(@checkout_log), params: { checkout_log: { BookId: @checkout_log.BookId, CheckoutDate: @checkout_log.CheckoutDate, DueDate: @checkout_log.DueDate, ReturnedDate: @checkout_log.ReturnedDate, UserId: @checkout_log.UserId, book_id: @checkout_log.book_id, user_id: @checkout_log.user_id } }
+    patch checkout_log_url(@checkout_log), params: { checkout_log: { BookId: @checkout_log.BookId, checkout_date: @checkout_log.checkout_date, due_date: @checkout_log.due_date, returned_date: @checkout_log.returned_date, UserId: @checkout_log.UserId, book_id: @checkout_log.book_id, user_id: @checkout_log.user_id } }
     assert_redirected_to checkout_log_url(@checkout_log)
   end
 

@@ -1,4 +1,4 @@
-<%= form_with(model: checkout_log, local: true) do |form| %>
+<%= form_with(model: [@book, @checkout_log], local: true) do |form| %>
   <% if checkout_log.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(checkout_log.errors.count, "error") %> prohibited this checkout_log from being saved:</h2>
@@ -22,18 +22,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :CheckoutDate %>
-    <%= form.datetime_select :CheckoutDate %>
+    <%= form.label :checkout_date %>
+    <%= form.datetime_select :checkout_date %>
   </div>
 
   <div class="field">
-    <%= form.label :DueDate %>
-    <%= form.datetime_select :DueDate %>
+    <%= form.label :due_date %>
+    <%= form.datetime_select :due_date %>
   </div>
 
   <div class="field">
-    <%= form.label :ReturnedDate %>
-    <%= form.datetime_select :ReturnedDate %>
+    <%= form.label :returned_date %>
+    <%= form.datetime_select :returned_date %>
   </div>
 
   <div class="field">

@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   get 'my_books/borrow'
   get 'my_books/return'
   get 'books/listing'
+  get 'books/borrow'
   
   get 'home/index'
+  
   resources :books do    
     resources :checkout_logs
   end

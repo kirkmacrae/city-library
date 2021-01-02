@@ -27,7 +27,7 @@
         <td><%= book.publisher %></td>
         <td><%= book.copies %></td>
         <% if current_user %>        
-        <td><%= link_to 'Borrow', my_books_return_path %></td>
+        <td><%= link_to 'Borrow', books_borrow_path %></td>
         <% end %>        
       </tr>
     <% end %>
