@@ -1,5 +1,5 @@
 class CheckoutLogsController < ApplicationController
-  before_action :get_book
+  before_action :get_book, except: [:borrow]
   before_action :set_checkout_log, only: [:show, :edit, :update, :destroy]
 
   # GET /checkout_logs
@@ -21,6 +21,43 @@ class CheckoutLogsController < ApplicationController
   # GET /checkout_logs/1/edit
   def edit
   end
+
+  #borrow book, create new checkout_log with duedate in 1 week
+  #refactor create code
+  #TODO: can't borrow a book that is currently being borrowed (check checkout_log)
+  def borrow
+    @book = Book.where(:book_number => params[:book_number]).take
+    @checkout_log = CheckoutLog.new(:checkout_date => Time.now,
+                                    :due_date => Time.now + 1.week,
+                                    :returned_date => :null,
+                                    :user_id => current_user.id,
+                                    :book_id => @book.id)
+
+    respond_to do |format|
+      if @checkout_log.save
+        format.html { redirect_to books_listing_path, notice: 'Book was successfully borrowed.' }
+        format.json { render :show, status: :created, location: @checkout_log }
+      else
+        format.html { render :new }
+        format.json { render json: @checkout_log.errors, status: :unprocessable_entity }
+      end
+    end    
+  end
+
+  #return book, update checkout_log returned_date to current time.
+  #refactor update code
+  def return
+    respond_to do |format|
+      if @checkout_log.update(:returned_date => Time.now)
+        format.html { redirect_to books_listing_path, notice: 'Book was successfully returned.' }
+        format.json { render :show, status: :ok, location: @checkout_log }
+      else
+        format.html { render :edit }
+        format.json { render json: @checkout_log.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # POST /checkout_logs
   # POST /checkout_logs.json
@@ -65,7 +102,7 @@ class CheckoutLogsController < ApplicationController
   private
     #get book associated with this checkout_log
     def get_book
-      @book = Book.find(params[:book_id])
+        @book = Book.find(params[:book_id])           
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_checkout_log
