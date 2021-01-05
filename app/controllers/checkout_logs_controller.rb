@@ -23,15 +23,20 @@ class CheckoutLogsController < ApplicationController
   end
 
   #borrow book, create new checkout_log with duedate in 1 week
-  #refactor create code
-  #TODO: can't borrow a book that is currently being borrowed (check checkout_log)
+  #refactor create code  
   def borrow
-    @book = Book.where(:book_number => params[:book_number]).take
-    @checkout_log = CheckoutLog.new(:checkout_date => Time.now,
+    #take one book that matches book_number and doesn't have a checkout_log record with a null returned_date (ie an available book of book_number)
+    @book = Book.where(book_number: params[:book_number]).where.not(id: CheckoutLog.where(returned_date: nil).pluck(:book_id)).take   
+    
+    if @book
+      @checkout_log = CheckoutLog.new(:checkout_date => Time.now,
                                     :due_date => Time.now + 1.week,
                                     :returned_date => :null,
                                     :user_id => current_user.id,
                                     :book_id => @book.id)
+    else
+      redirect_to books_listing_path, notice: 'None of those Books are currently available.' and return   
+    end
 
     respond_to do |format|
       if @checkout_log.save
@@ -66,7 +71,7 @@ class CheckoutLogsController < ApplicationController
 
     respond_to do |format|
       if @checkout_log.save
-        format.html { redirect_to @checkout_log, notice: 'Checkout log was successfully created.' }
+        format.html { redirect_to book_checkout_logs_path(@book), notice: 'Checkout log was successfully created.' }
         format.json { render :show, status: :created, location: @checkout_log }
       else
         format.html { render :new }
@@ -80,7 +85,7 @@ class CheckoutLogsController < ApplicationController
   def update
     respond_to do |format|
       if @checkout_log.update(checkout_log_params)
-        format.html { redirect_to @checkout_log, notice: 'Checkout log was successfully updated.' }
+        format.html { redirect_to book_checkout_logs_path(@book), notice: 'Checkout log was successfully updated.' }
         format.json { render :show, status: :ok, location: @checkout_log }
       else
         format.html { render :edit }
@@ -94,7 +99,7 @@ class CheckoutLogsController < ApplicationController
   def destroy
     @checkout_log.destroy
     respond_to do |format|
-      format.html { redirect_to checkout_logs_url, notice: 'Checkout log was successfully destroyed.' }
+      format.html { redirect_to book_checkout_logs_path(@book), notice: 'Checkout log was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
