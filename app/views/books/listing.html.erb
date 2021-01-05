@@ -27,7 +27,7 @@
         <td><%= book.publisher %></td>
         <td><%= book.copies %></td>
         <% if current_user %>   
-        <!-- TODO: check to see if copies > 0-->     
+        <!-- TODO: check to see if copies > 0 before displaying link-->     
         <td><%= link_to 'Borrow',  books_borrow_path(:book_number => book.book_number) %></td>
         <% end %>        
       </tr>

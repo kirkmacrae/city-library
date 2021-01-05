@@ -1,11 +1,12 @@
 Rails.application.routes.draw do    
   devise_for :users
   
-  get 'my_books/index'
+  get 'books/my_books'
   get 'books/listing'  
   
   get 'home/index'
   get 'books/borrow', to: 'checkout_logs#borrow'
+  get 'books/return', to: 'checkout_logs#return'
   
   resources :books do    
     resources :checkout_logs

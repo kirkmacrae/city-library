@@ -26,7 +26,7 @@
         <td><%= book.pages %></td>
         <td><%= book.publisher %></td>
         <td><%= book.due_date %></td>          
-        <td><%= link_to 'Return', my_books_return %></td>        
+        <td><%= link_to 'Return', books_return_path(:book_id => book.id) %></td>        
       </tr>
     <% end %>
   </tbody>
