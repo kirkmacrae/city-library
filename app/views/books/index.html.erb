@@ -27,7 +27,7 @@
         <% if current_user.try(:admin?) %>        
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book_path(book), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add Copy', '/' %></td>
+        <td><%= link_to 'Add Copy', add_copy_path(book) %></td>
         <td><%= link_to 'Checkout Logs', book_checkout_logs_path(book) %></td>
         <% end %>
       </tr>

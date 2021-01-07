@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :add_copy]
 
   # GET /books
   # GET /books.json
@@ -41,8 +41,20 @@ class BooksController < ApplicationController
 
   # POST /books
   # POST /books.json
-  def create
-    @book = Book.new(book_params)
+  def create    
+    @next_book_number = (Book.maximum(:book_number)) + 1
+    #initially assign the next available book_number to this book
+    @book = Book.new(book_params.merge!(:book_number => @next_book_number))
+    @existing_identical_book = Book.where(title: @book.title,
+                                          author: @book.author,
+                                          genre: @book.genre,
+                                          subgenre: @book.subgenre,
+                                          pages: @book.pages,
+                                          publisher: @book.publisher).take
+    #if an existing identical book exists, then make the book_number match before saving the new book to database
+    if @existing_identical_book
+      @book.book_number = @existing_identical_book.book_number  
+    end                                        
 
     respond_to do |format|
       if @book.save
@@ -51,6 +63,21 @@ class BooksController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  #add another copy of an existing book
+  def add_copy    
+    @book_new_copy = @book.dup                       
+
+    respond_to do |format|
+      if @book_new_copy.save
+        format.html { redirect_to @book_new_copy, notice: 'Copy was successfully created.' }
+        format.json { render :show, status: :created, location: @book_new_copy }
+      else
+        format.html { render :new }
+        format.json { render json: @book_new_copy.errors, status: :unprocessable_entity }
       end
     end
   end
