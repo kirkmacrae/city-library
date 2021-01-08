@@ -23,12 +23,13 @@ class BooksController < ApplicationController
   #list books for current user that are borrowed
   def my_books
     #join books and checkoutlogs, where user_id = current_user.id and returned_date = null
-    @checkoutlogs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})    
+    @checkout_logs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})    
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+    @checkout_logs = CheckoutLog.joins(:book).where(checkout_logs: {book_id: @book.id})
   end
 
   # GET /books/new

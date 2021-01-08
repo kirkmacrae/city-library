@@ -35,5 +35,28 @@
 <%= link_to 'Back', books_path %>
 
 <% if current_user.try(:admin?) %>
-<!--  TODO: show checkout history for this book-->
+<br>
+<br>
+<h4> Checkout History </h4>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>      
+      <th>CheckoutDate</th>
+      <th>DueDate</th>
+      <th>ReturnedDate</th>            
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkout_logs.each do |checkout_log| %>    
+      <tr>
+        <td><%= checkout_log.user.email %></td>        
+        <td><%= checkout_log.checkout_date %></td>
+        <td><%= checkout_log.due_date %></td>
+        <td><%= checkout_log.returned_date %></td>                
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>

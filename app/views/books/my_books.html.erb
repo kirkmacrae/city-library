@@ -17,16 +17,16 @@
   </thead>
 
   <tbody>
-    <% @checkoutlogs.each do |checkoutlog| %>
+    <% @checkout_logs.each do |checkout_log| %>
       <tr>
-        <td><%= checkoutlog.book.title %></td>
-        <td><%= checkoutlog.book.author %></td>
-        <td><%= checkoutlog.book.genre %></td>
-        <td><%= checkoutlog.book.subgenre %></td>
-        <td><%= checkoutlog.book.pages %></td>
-        <td><%= checkoutlog.book.publisher %></td>
-        <td><%= checkoutlog.due_date %></td>
-        <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkoutlog.id) %></td>        
+        <td><%= checkout_log.book.title %></td>
+        <td><%= checkout_log.book.author %></td>
+        <td><%= checkout_log.book.genre %></td>
+        <td><%= checkout_log.book.subgenre %></td>
+        <td><%= checkout_log.book.pages %></td>
+        <td><%= checkout_log.book.publisher %></td>
+        <td><%= checkout_log.due_date %></td>
+        <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkout_log.id) %></td>        
       </tr>
     <% end %>
   </tbody>
