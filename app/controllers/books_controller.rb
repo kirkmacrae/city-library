@@ -22,7 +22,8 @@ class BooksController < ApplicationController
 
   #list books for current user that are borrowed
   def my_books
-    @books = CheckoutLog.joins(:book).where(returned_date: nil, user_id: params[:user])
+    #join books and checkoutlogs, where user_id = current_user.id and returned_date = null
+    @checkoutlogs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})    
   end
 
   # GET /books/1
@@ -82,15 +83,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def borrow
-    # TODO:
-    # 1. take first book with book_number that is still available
-    # 2. create new entry in checkoutlog table with that book_id and user_id of current_user
-    redirect_to books_listing_url
-  end
-
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
+  #TODO: ensure book_number is correct after edit/update
   def update
     respond_to do |format|
       if @book.update(book_params)

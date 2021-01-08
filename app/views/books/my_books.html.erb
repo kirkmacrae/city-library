@@ -11,22 +11,22 @@
       <th>Subgenre</th>
       <th>Pages</th>
       <th>Publisher</th>      
-      <th>due_date</th>
+      <th>DueDate</th>
       <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @books.each do |book| %>
+    <% @checkoutlogs.each do |checkoutlog| %>
       <tr>
-        <td><%= link_to book.title, book %></td>
-        <td><%= book.author %></td>
-        <td><%= book.genre %></td>
-        <td><%= book.subgenre %></td>
-        <td><%= book.pages %></td>
-        <td><%= book.publisher %></td>
-        <td><%= book.due_date %></td>          
-        <td><%= link_to 'Return', books_return_path %></td>        
+        <td><%= checkoutlog.book.title %></td>
+        <td><%= checkoutlog.book.author %></td>
+        <td><%= checkoutlog.book.genre %></td>
+        <td><%= checkoutlog.book.subgenre %></td>
+        <td><%= checkoutlog.book.pages %></td>
+        <td><%= checkoutlog.book.publisher %></td>
+        <td><%= checkoutlog.due_date %></td>
+        <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkoutlog.id) %></td>        
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,5 @@
 class CheckoutLogsController < ApplicationController
-  before_action :get_book, except: [:borrow]
+  before_action :get_book, except: [:borrow, :return]
   before_action :set_checkout_log, only: [:show, :edit, :update, :destroy]
 
   # GET /checkout_logs
@@ -52,9 +52,10 @@ class CheckoutLogsController < ApplicationController
   #return book, update checkout_log returned_date to current time.
   #refactor update code
   def return
+    @checkout_log = CheckoutLog.find(params[:checkout_log_id])
     respond_to do |format|
       if @checkout_log.update(:returned_date => Time.now)
-        format.html { redirect_to books_listing_path, notice: 'Book was successfully returned.' }
+        format.html { redirect_to books_my_books_path, notice: 'Book was successfully returned.' }
         format.json { render :show, status: :ok, location: @checkout_log }
       else
         format.html { render :edit }
