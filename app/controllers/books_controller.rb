@@ -10,14 +10,29 @@ class BooksController < ApplicationController
   # a list of all unique books
   # GET /books/listing
   def listing
-    #TODO: substract number of books that haven't been returned yet from 'copies' to get number of available books
-    @books = Book.select(
-      [
-        :title, :author, :genre, :subgenre, :pages, :publisher, :book_number, Book.arel_table[:book_number].count.as('copies')
-      ]
-    ).group(
-      :book_number, :title, :author, :genre, :subgenre, :pages, :publisher
-    )
+    #TODO: find cleaner way to build this
+    sql = "select t1.title,t1.author, t1.genre, t1.subgenre, t1.pages, t1.publisher,t1.book_number, t1.copies, t2.borrowed_copies from
+
+    (select title,author, genre, subgenre, pages, publisher,book_number,count(book_number) as copies from books
+    group by book_number,title,author, genre, subgenre, pages, publisher) t1
+    
+    LEFT OUTER JOIN
+    
+    (
+      select b.book_number,count(b.book_number) as borrowed_copies from 
+    
+    (select * from books) b
+      
+    JOIN
+    (select * from checkout_logs) c
+    ON b.id = c.book_id
+    where returned_date is null
+    group by b.book_number
+      
+    ) t2
+    ON 
+    t1.book_number = t2.book_number"
+    @books = ActiveRecord::Base.connection.execute(sql).values    
   end
 
   #list books for current user that are borrowed
