@@ -11,27 +11,27 @@ class BooksController < ApplicationController
   # GET /books/listing
   def listing
     #TODO: find cleaner way to build this
-    sql = "select t1.title,t1.author, t1.genre, t1.subgenre, t1.pages, t1.publisher,t1.book_number, t1.copies, t2.borrowed_copies from
-
-    (select title,author, genre, subgenre, pages, publisher,book_number,count(book_number) as copies from books
-    group by book_number,title,author, genre, subgenre, pages, publisher) t1
+    sql = "select
+    title,
+    author,
+    genre,
+    subgenre,
+    pages,
+    publisher,
+    book_number,
+    count(book_number) as copies,
+    count(log.book_id) as borrowed_copies
+    from books as lib
     
-    LEFT OUTER JOIN
-    
-    (
-      select b.book_number,count(b.book_number) as borrowed_copies from 
-    
-    (select * from books) b
-      
-    JOIN
-    (select * from checkout_logs) c
-    ON b.id = c.book_id
+    left join (
+    select distinct
+    book_id
+    from checkout_logs
     where returned_date is null
-    group by b.book_number
-      
-    ) t2
-    ON 
-    t1.book_number = t2.book_number"
+    ) as log
+    ON lib.id = log.book_id
+    
+    group by 1,2,3,4,5,6,7"
     @books = ActiveRecord::Base.connection.execute(sql).values    
   end
 
