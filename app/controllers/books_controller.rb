@@ -35,6 +35,25 @@ class BooksController < ApplicationController
     @books = ActiveRecord::Base.connection.execute(sql).values    
   end
 
+  def details
+    #TODO: find cleaner way to build this    
+    @book = Book.where(book_number: params[:book_number]).take  
+    sql = "SELECT DISTINCT ON (books.id)
+    books.id, users.email, c.returned_date, c.due_date
+    FROM checkout_logs c
+    RIGHT JOIN books
+    ON c.book_id = books.id
+    LEFT JOIN users
+    on c.user_id = users.id
+    where books.book_number = #{ActiveRecord::Base.sanitize_sql(params[:book_number])}
+    ORDER BY books.id, c.returned_date DESC
+    "  
+    
+    @checkout_logs = ActiveRecord::Base.connection.execute(sql).values  
+    
+  end
+
+
   #list books for current user that are borrowed
   def my_books
     #join books and checkoutlogs, where user_id = current_user.id and returned_date = null

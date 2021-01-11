@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'books/return', to: 'checkout_logs#return'
   get 'books/my_books'
   get 'books/listing'
+  get 'books/listing/:book_number' => 'books#details', :as => :book_listing_details
   get 'books/:id/add_copy' => 'books#add_copy', :as => :add_copy
+
   
   resources :books do    
     resources :checkout_logs
