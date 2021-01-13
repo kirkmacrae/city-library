@@ -22,11 +22,14 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-#bootstrap
+#bootstrap for front-end styling
 gem 'bootstrap', '~> 4.5', '>= 4.5.3'
 
-# authentication
+# user authentication
 gem 'devise', '~> 4.2'
+
+# scheduling tasks
+gem 'whenever', require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
