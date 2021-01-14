@@ -1,4 +1,6 @@
 class CheckoutLogsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_admin, except: [:borrow, :return]
   before_action :get_book, except: [:borrow, :return]
   before_action :set_checkout_log, only: [:show, :edit, :update, :destroy]
 
@@ -106,6 +108,8 @@ class CheckoutLogsController < ApplicationController
   end
 
   private
+    def is_admin
+    end
     #get book associated with this checkout_log
     def get_book
         @book = Book.find(params[:book_id])           

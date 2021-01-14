@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: [:listing]
+  before_action :is_admin, except: [:listing, :my_books]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :add_copy]
 
   # GET /books
