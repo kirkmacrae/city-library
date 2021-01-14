@@ -51,18 +51,23 @@ class CheckoutLogsController < ApplicationController
     end    
   end
 
-  #return book, update checkout_log returned_date to current time.
-  #refactor update code
+  #return book, update checkout_log returned_date to current time.  
   def return
     @checkout_log = CheckoutLog.find(params[:checkout_log_id])
-    respond_to do |format|
-      if @checkout_log.update(:returned_date => Time.now)
-        format.html { redirect_to books_my_books_path, notice: 'Book was successfully returned.' }
-        format.json { render :show, status: :ok, location: @checkout_log }
-      else
-        format.html { render :edit }
-        format.json { render json: @checkout_log.errors, status: :unprocessable_entity }
+    #verify correct user is trying to return this book 
+    if @checkout_log.user_id == current_user.id
+      respond_to do |format|
+        if @checkout_log.update(:returned_date => Time.now)
+          format.html { redirect_to books_my_books_path, notice: 'Book was successfully returned.' }
+          format.json { render :show, status: :ok, location: @checkout_log }
+        else
+          format.html { render :edit }
+          format.json { render json: @checkout_log.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      #wrong user trying to return someone elses book
+      redirect_to root_path
     end
   end
 
