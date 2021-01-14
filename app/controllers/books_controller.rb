@@ -49,12 +49,10 @@ class BooksController < ApplicationController
     on c.user_id = users.id
     where books.book_number = #{ActiveRecord::Base.sanitize_sql(params[:book_number])}
     ORDER BY books.id, c.returned_date DESC
-    "  
-    
-    @checkout_logs = ActiveRecord::Base.connection.execute(sql).values  
-    
-  end
+    " 
 
+    @checkout_logs = ActiveRecord::Base.connection.execute(sql).values
+  end
 
   #list books for current user that are borrowed
   def my_books
@@ -121,11 +119,24 @@ class BooksController < ApplicationController
   end
 
   # PATCH/PUT /books/1
-  # PATCH/PUT /books/1.json
-  #TODO: ensure book_number is correct after edit/update
-  def update
+  # PATCH/PUT /books/1.json  
+  def update    
+    @existing_identical_book = Book.where(title: book_params[:title],
+                                          author: book_params[:author],
+                                          genre: book_params[:genre],
+                                          subgenre: book_params[:subgenre],
+                                          pages: book_params[:pages],
+                                          publisher: book_params[:publisher]
+                                        ).take
+    #if an existing identical book exists, then make the book_number match otherwise set to a new book_number
+    if @existing_identical_book
+      params[:book_number] = @existing_identical_book.book_number  
+    else
+      params[:book_number] = (Book.maximum(:book_number)) + 1
+    end
+
     respond_to do |format|
-      if @book.update(book_params)
+      if @book.update(book_params.merge!(:book_number => params[:book_number]))
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
