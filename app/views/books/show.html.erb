@@ -52,9 +52,9 @@
     <% @checkout_logs.each do |checkout_log| %>    
       <tr>
         <td><%= checkout_log.user.email %></td>        
-        <td><%= checkout_log.checkout_date %></td>
-        <td><%= checkout_log.due_date %></td>
-        <td><%= checkout_log.returned_date %></td>                
+        <td><%= checkout_log.checkout_date.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td><%= checkout_log.due_date.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td><%= checkout_log.returned_date.strftime("%B %d, %Y, %l:%M%p") %></td>                
       </tr>
     <% end %>
   </tbody>

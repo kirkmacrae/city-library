@@ -19,9 +19,9 @@
       <tr>
         <td><%= checkout_log.user_id %></td>
         <td><%= checkout_log.book_id %></td>
-        <td><%= checkout_log.checkout_date %></td>
-        <td><%= checkout_log.due_date %></td>
-        <td><%= checkout_log.returned_date %></td>        
+        <td><%= checkout_log.checkout_date.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td><%= checkout_log.due_date.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td><%= checkout_log.returned_date.strftime("%B %d, %Y, %l:%M%p") %></td>        
         <td><%= link_to 'Show', book_checkout_log_path(@book, checkout_log) %></td>
         <td><%= link_to 'Edit', edit_book_checkout_log_path(@book, checkout_log) %></td>
         <td><%= link_to 'Destroy', book_checkout_log_path(@book, checkout_log), method: :delete, data: { confirm: 'Are you sure?' } %></td>

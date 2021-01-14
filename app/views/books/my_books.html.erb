@@ -25,7 +25,7 @@
         <td><%= checkout_log.book.subgenre %></td>
         <td><%= checkout_log.book.pages %></td>
         <td><%= checkout_log.book.publisher %></td>
-        <td><%= checkout_log.due_date %></td>
+        <td><%= checkout_log.due_date.strftime("%B %d, %Y, %l:%M%p") %></td>
         <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkout_log.id) %></td>        
       </tr>
     <% end %>

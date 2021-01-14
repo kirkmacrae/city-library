@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 <p>
   <strong>CheckoutDate:</strong>
-  <%= @checkout_log.checkout_date %>
+  <%= @checkout_log.checkout_date.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
   <strong>DueDate:</strong>
-  <%= @checkout_log.due_date %>
+  <%= @checkout_log.due_date.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
   <strong>ReturnedDate:</strong>
-  <%= @checkout_log.returned_date %>
+  <%= @checkout_log.returned_date.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
