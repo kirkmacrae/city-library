@@ -1,3 +1,27 @@
 
 
-<p>Please visit the library and return your books</p> 
+<p><%= @user.email %> ,please visit the library and return the following overdue book(s):</p> 
+
+<table>
+  <thead>
+    <tr>
+      <th>BookId</th>
+      <th>BookNumber</th>
+      <th>Title</th>
+      <th>CheckoutDate</th>
+      <th>DueDate</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkout_logs.each do |checkout_log| %>
+      <tr>
+        <td><%= checkout_log.book.id %></td>
+        <td><%= checkout_log.book.book_number %></td>
+        <td><%= checkout_log.book.title %></td>
+        <td><%= checkout_log.checkout_date %></td>
+        <td><%= checkout_log.due_date %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
