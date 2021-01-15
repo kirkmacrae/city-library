@@ -1,4 +1,9 @@
-need to add text to this email template
-
-overdue books
-
+<%= @user.email %> ,please visit the library and return the following overdue book(s): 
+ 
+<% @checkout_logs.each do |checkout_log| %>     
+ BookId:   <%= checkout_log.book.id %>
+ BookNumber:   <%= checkout_log.book.book_number %>
+ Title:   <%= checkout_log.book.title %>
+ CheckoutDate:   <%= checkout_log.checkout_date %>
+ DueDate:   <%= checkout_log.due_date %>
+<% end %>
