@@ -78,7 +78,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create    
-    @next_book_number = (Book.maximum(:book_number)) + 1
+    @next_book_number = Book.maximum(:book_number).to_i.next
     #initially assign the next available book_number to this book
     @book = Book.new(book_params.merge!(:book_number => @next_book_number))
     @existing_identical_book = Book.where(title: @book.title,
@@ -132,7 +132,7 @@ class BooksController < ApplicationController
     if @existing_identical_book
       params[:book_number] = @existing_identical_book.book_number  
     else
-      params[:book_number] = (Book.maximum(:book_number)) + 1
+      params[:book_number] = Book.maximum(:book_number).to_i.next
     end
 
     respond_to do |format|
