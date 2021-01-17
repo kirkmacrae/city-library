@@ -31,6 +31,9 @@ gem 'devise', '~> 4.2'
 # scheduling tasks
 gem 'whenever', require: false
 
+#importing excel files for mass upload of books
+gem 'roo', '~> 2.8'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
