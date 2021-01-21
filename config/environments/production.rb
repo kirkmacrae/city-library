@@ -70,7 +70,8 @@ Rails.application.configure do
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
-
+  
+  config.action_mailer.default_url_options = { :host => 'ptag-library.heroku.com' }
 
   config.action_mailer.perform_caching = false
 
