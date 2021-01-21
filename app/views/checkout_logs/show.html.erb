@@ -1,16 +1,16 @@
 <p>
   <strong>CheckoutDate:</strong>
-  <%= @checkout_log.checkout_date.strftime("%B %d, %Y, %l:%M%p") %>
+  <%= @checkout_log.checkout_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
   <strong>DueDate:</strong>
-  <%= @checkout_log.due_date.strftime("%B %d, %Y, %l:%M%p") %>
+  <%= @checkout_log.due_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
   <strong>ReturnedDate:</strong>
-  <%= @checkout_log.returned_date.strftime("%B %d, %Y, %l:%M%p") %>
+  <%= @checkout_log.returned_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
