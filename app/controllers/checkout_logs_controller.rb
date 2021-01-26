@@ -7,7 +7,7 @@ class CheckoutLogsController < ApplicationController
   # GET /checkout_logs
   # GET /checkout_logs.json
   def index
-    @checkout_logs = @book.checkout_logs
+    @checkout_logs = @book.checkout_logs.paginate(page: params[:page]).order(:checkout_date)
   end
 
   # GET /checkout_logs/1

@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index    
-    @books = Book.all
+    @books = Book.paginate(page: params[:page]).order(:title)
   end
 
   # a list of all unique books
@@ -34,7 +34,7 @@ class BooksController < ApplicationController
     ON lib.id = log.book_id
     
     group by 1,2,3,4,5,6,7"
-    @books = ActiveRecord::Base.connection.execute(sql).values    
+    @books = ActiveRecord::Base.connection.execute(sql).values
   end
 
   def details

@@ -33,3 +33,5 @@
 <%= link_to 'New Checkout Log', new_book_checkout_log_path %>
 
 <%= link_to 'Back', books_path %>
+
+<%= will_paginate(@checkout_logs) %>

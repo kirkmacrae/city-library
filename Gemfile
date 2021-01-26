@@ -34,6 +34,9 @@ gem 'whenever', require: false
 #importing excel files for mass upload of books
 gem 'roo', '~> 2.8'
 
+#pagination
+gem 'will_paginate', '~> 3.3'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
