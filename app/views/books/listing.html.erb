@@ -1,7 +1,7 @@
 <h1>Book Listing</h1>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
       <th>Title</th>
       <th>Author</th>
@@ -9,9 +9,9 @@
       <th>Subgenre</th>
       <th>Pages</th>
       <th>Publisher</th>
-      <th>TotalCopies</th>
-      <th>Available</th>      
-      <th colspan="2"></th>
+      <th>Total Copies</th>
+      <th>Available Copies</th>      
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -27,15 +27,14 @@
         <td><%= book[7] %></td>
         <td><%= book[7] - (book[8]? book[8] : 0) %></td>
         <% if current_user.try(:admin?) %>
-        <td><%= link_to 'Details',  book_listing_details_path(:book_number => book[6]) %></td>
+        <td><%= link_to 'Details',  book_listing_details_path(:book_number => book[6]) , class: 'btn btn-primary py-0 m-1 btn-sm' %>
         <% end %>
         <% if current_user && book[7] - (book[8]? book[8] : 0) > 0 %>           
-        <td><%= link_to 'Borrow',  books_borrow_path(:book_number => book[6]) %></td>
-        <% end %>        
+        <%= link_to 'Borrow',  books_borrow_path(:book_number => book[6]) , class: 'btn btn-primary py-0 m-1 btn-sm' %>
+        <% end %>  
+        </td>      
         
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>

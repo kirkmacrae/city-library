@@ -10,38 +10,27 @@
       </ul>
     </div>
   <% end %>
+<dl class="row">
+  <dt class="col-sm-1"><%= form.label :title %> </dt>
+  <dd class="col-sm-11"><%= form.text_field :title %></dd>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :author %> </dt>
+  <dd class="col-sm-11"><%= form.text_field :author %></dd>
 
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :genre %> </dt>
+  <dd class="col-sm-11"><%= form.text_field :genre %></dd>
 
-  <div class="field">
-    <%= form.label :genre %>
-    <%= form.text_field :genre %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :subgenre %> </dt>
+  <dd class="col-sm-11"> <%= form.text_field :subgenre %></dd>
 
-  <div class="field">
-    <%= form.label :subgenre %>
-    <%= form.text_field :subgenre %>
-  </div>
+  <dt class="col-sm-1"> <%= form.label :pages %></dt>
+  <dd class="col-sm-11"><%= form.number_field :pages %></dd>
 
-  <div class="field">
-    <%= form.label :pages %>
-    <%= form.number_field :pages %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publisher %>
-    <%= form.text_field :publisher %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :publisher %></dt>
+  <dd class="col-sm-11"><%= form.text_field :publisher %></dd> 
+</dl>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.button button_text, class: 'btn btn-primary py-0 m-1 btn-sm'%>
   </div>
 <% end %>

@@ -1,15 +1,15 @@
 
 
-<p><%= @user.email %> ,please visit the library and return the following overdue book(s):</p> 
+<p><%= @user.email %>, please visit the library and return the following overdue book(s):</p> 
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>BookId</th>
-      <th>BookNumber</th>
+      <th>Book Id</th>
+      <th>Book Number</th>
       <th>Title</th>
-      <th>CheckoutDate</th>
-      <th>DueDate</th>      
+      <th>Checkout Date</th>
+      <th>Due Date</th>      
     </tr>
   </thead>
 
@@ -19,8 +19,8 @@
         <td><%= checkout_log.book.id %></td>
         <td><%= checkout_log.book.book_number %></td>
         <td><%= checkout_log.book.title %></td>
-        <td><%= checkout_log.checkout_date %></td>
-        <td><%= checkout_log.due_date %></td>        
+        <td><%= checkout_log.checkout_date&.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td><%= checkout_log.due_date&.strftime("%B %d, %Y, %l:%M%p") %></td>        
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,6 @@
 <h1>My Books</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -9,7 +9,7 @@
       <th>Subgenre</th>
       <th>Pages</th>
       <th>Publisher</th>      
-      <th>DueDate</th>
+      <th>Due Date</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -24,7 +24,7 @@
         <td><%= checkout_log.book.pages %></td>
         <td><%= checkout_log.book.publisher %></td>
         <td><%= checkout_log.due_date&.strftime("%B %d, %Y, %l:%M%p") %></td>
-        <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkout_log.id) %></td>        
+        <td><%= link_to 'Return', books_return_path(:checkout_log_id => checkout_log.id), class: 'btn btn-primary py-0 m-1 btn-sm' %></td>        
       </tr>
     <% end %>
   </tbody>

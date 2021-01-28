@@ -33,7 +33,8 @@ class BooksController < ApplicationController
     ) as log
     ON lib.id = log.book_id
     
-    group by 1,2,3,4,5,6,7"
+    group by 1,2,3,4,5,6,7
+    ORDER BY lib.title"
     @books = ActiveRecord::Base.connection.execute(sql).values
   end
 

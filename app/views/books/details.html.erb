@@ -35,7 +35,7 @@
   <%= @book.publisher %>
 </p>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>BookId</th>      
@@ -47,7 +47,7 @@
     <% @checkout_logs.each do |checkout_log| %>
       <tr>
         <td><%= checkout_log[0] %></td>        
-        <td><%= (!checkout_log[2] && checkout_log[3]? "Signed out by " + checkout_log[1] : "Available")  %></td>             
+        <td><%= (!checkout_log[2] && checkout_log[3]? "Signed out by " + checkout_log[1] : "Available") %></td>             
       </tr>
     <% end %>
   </tbody>

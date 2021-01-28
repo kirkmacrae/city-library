@@ -2,5 +2,5 @@
 
 <%= render 'form', checkout_log: @checkout_log %>
 
-<%= link_to 'Show', @checkout_log_path %> |
-<%= link_to 'Back', book_checkout_logs_path(@book) %>
+<%= link_to 'Show', @checkout_log_path, class: 'btn btn-primary py-0 m-1 btn-sm' %> 
+<%= link_to 'Back', book_checkout_logs_path(@book), class: 'btn btn-primary py-0 m-1 btn-sm' %>

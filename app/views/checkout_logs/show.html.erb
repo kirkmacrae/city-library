@@ -1,15 +1,15 @@
 <p>
-  <strong>CheckoutDate:</strong>
+  <strong>Checkout Date:</strong>
   <%= @checkout_log.checkout_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
-  <strong>DueDate:</strong>
+  <strong>Due Date:</strong>
   <%= @checkout_log.due_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
 <p>
-  <strong>ReturnedDate:</strong>
+  <strong>Returned Date:</strong>
   <%= @checkout_log.returned_date&.strftime("%B %d, %Y, %l:%M%p") %>
 </p>
 
@@ -23,5 +23,5 @@
   <%= @checkout_log.book_id %>
 </p>
 
-<%= link_to 'Edit', edit_book_checkout_log_path(@checkout_log) %> |
-<%= link_to 'Back', book_checkout_logs_path %>
+<%= link_to 'Edit', edit_book_checkout_log_path(@checkout_log), class: 'btn btn-primary py-0 m-1 btn-sm' %>
+<%= link_to 'Back', book_checkout_logs_path, class: 'btn btn-primary py-0 m-1 btn-sm' %>

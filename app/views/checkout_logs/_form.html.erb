@@ -11,32 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :checkout_date %>
-    <%= form.datetime_select :checkout_date %>
-  </div>
+  <dl class="row">
+    <dt class="col-sm-1"><%= form.label :checkout_date %></dt>
+    <dd class="col-sm-11"> <%= form.datetime_select :checkout_date %></dd>
 
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.datetime_select :due_date %>
-  </div>
+    <dt class="col-sm-1"> <%= form.label :due_date %></dt>
+    <dd class="col-sm-11"><%= form.datetime_select :due_date %></dd>
 
-  <div class="field">
-    <%= form.label :returned_date %>
-    <%= form.datetime_select :returned_date %>
-  </div>
+    <dt class="col-sm-1"><%= form.label :returned_date %></dt>
+    <dd class="col-sm-11"><%= form.datetime_select :returned_date %></dd>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+    <dt class="col-sm-1"><%= form.label :subgenre %> </dt>
+    <dd class="col-sm-11"> <%= form.text_field :subgenre %></dd>
 
-  <div class="field">
-    <%= form.label :book_id %>
-    <%= form.text_field :book_id %>
-  </div>
+    <dt class="col-sm-1"><%= form.label :user_id %></dt>
+    <dd class="col-sm-11"><%= form.text_field :user_id %></dd>
+
+    <dt class="col-sm-1"><%= form.label :book_id %></dt>
+    <dd class="col-sm-11"><%= form.text_field :book_id %></dd> 
+</dl>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit button_text, class: 'btn btn-primary py-0 m-1 btn-sm' %>
   </div>
 <% end %>
