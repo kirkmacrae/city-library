@@ -1,4 +1,4 @@
-<%= @user.email %> ,please visit the library and return the following overdue book(s): 
+<%= @user.email %> ,please visit the City Library system and return the following overdue book(s): 
  
 <% @checkout_logs.each do |checkout_log| %>     
  BookId:   <%= checkout_log.book.id %>

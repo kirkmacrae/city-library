@@ -26,14 +26,14 @@ default: &default
 
 development:
   <<: *default  
-  database: library_development
+  database: city_library_development
   
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: library
+  #username: city_library
 
   # The password associated with the postgres role (username).
   #password:
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: library_test
+  database: city_library_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,6 +85,6 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  #database: library_production
-  #username: library
-  #password: <%= ENV['LIBRARY_DATABASE_PASSWORD'] %>
+  #database: city_library_production
+  #username: city_library
+  #password: <%= ENV['CITY_LIBRARY_DATABASE_PASSWORD'] %>
