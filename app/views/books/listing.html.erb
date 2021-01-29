@@ -9,6 +9,7 @@
       <th>Subgenre</th>
       <th>Pages</th>
       <th>Publisher</th>
+      <th>Library</th>
       <th>Total Copies</th>
       <th>Available Copies</th>      
       <th colspan="1"></th>
@@ -24,6 +25,7 @@
         <td><%= book[3] %></td>
         <td><%= book[4] %></td>
         <td><%= book[5] %></td>
+        <td><%= book[9] %></td>
         <td><%= book[7] %></td>
         <td><%= book[7] - (book[8]? book[8] : 0) %></td>
         <% if current_user.try(:admin?) %>

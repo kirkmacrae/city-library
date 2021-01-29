@@ -18,7 +18,8 @@
       <th>Genre</th>
       <th>Subgenre</th>
       <th>Pages</th>
-      <th>Publisher</th>      
+      <th>Publisher</th>
+      <th>Library</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -31,7 +32,8 @@
         <td><%= book.genre %></td>
         <td><%= book.subgenre %></td>
         <td><%= book.pages %></td>
-        <td><%= book.publisher %></td>               
+        <td><%= book.publisher %></td>
+        <td><%= book.library.name %></td>            
         <% if current_user.try(:admin?) %>
         <td>
           <%= link_to 'Show', book_path(book), class: 'btn btn-primary py-0 btn-sm' %>

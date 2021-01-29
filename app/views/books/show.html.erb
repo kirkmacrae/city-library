@@ -27,6 +27,11 @@
   <strong>Publisher:</strong>
   <%= @book.publisher %>
 </p>
+
+<p>
+  <strong>Library:</strong>
+  <%= @book.library.name %>
+</p>
 <% if current_user.try(:admin?) %>
 <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-primary py-0 m-1 btn-sm' %>
 <% end %>
