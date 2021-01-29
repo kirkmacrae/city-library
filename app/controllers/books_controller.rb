@@ -20,9 +20,10 @@ class BooksController < ApplicationController
     subgenre,
     pages,
     publisher,
-    book_number,
+    book_number,    
     count(book_number) as copies,
-    count(log.book_id) as borrowed_copies
+    count(log.book_id) as borrowed_copies,
+    library_id
     from books as lib
     
     left join (
@@ -33,7 +34,7 @@ class BooksController < ApplicationController
     ) as log
     ON lib.id = log.book_id
     
-    group by 1,2,3,4,5,6,7
+    group by 1,2,3,4,5,6,7,10
     ORDER BY lib.title"
     @books = ActiveRecord::Base.connection.execute(sql).values
   end
