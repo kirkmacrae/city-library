@@ -112,9 +112,7 @@ class CheckoutLogsController < ApplicationController
     end
   end
 
-  private
-    def is_admin
-    end
+  private    
     #get book associated with this checkout_log
     def get_book
         @book = Book.find(params[:book_id])           

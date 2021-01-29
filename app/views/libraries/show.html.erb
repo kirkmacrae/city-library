@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Id:</strong>
+  <%= @library.id %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @library.name %>
 </p>
@@ -15,5 +20,5 @@
   <%= @library.phone_number %>
 </p>
 
-<%= link_to 'Edit', edit_library_path(@library) %> |
-<%= link_to 'Back', libraries_path %>
+<%= link_to 'Edit', edit_library_path(@library), class: 'btn btn-primary py-0 m-1 btn-sm' %>
+<%= link_to 'Back', libraries_path, class: 'btn btn-primary py-0 m-1 btn-sm' %>

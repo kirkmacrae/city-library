@@ -10,23 +10,18 @@
       </ul>
     </div>
   <% end %>
+<dl class="row">
+  <dt class="col-sm-1"><%= form.label :name %></dt>
+  <dd class="col-sm-11"><%= form.text_field :name %></dd>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :address %></dt>
+  <dd class="col-sm-11"><%= form.text_field :address %></dd>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
+  <dt class="col-sm-1"><%= form.label :phone_number %></dt>
+  <dd class="col-sm-11"><%= form.text_field :phone_number %></dd> 
+</dl>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.button button_text, class: 'btn btn-primary py-0 m-1 btn-sm'%>
   </div>
 <% end %>

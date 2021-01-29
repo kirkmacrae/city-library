@@ -1,4 +1,6 @@
 class LibrariesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_admin
   before_action :set_library, only: %w[ show edit update destroy ]
 
   # GET /libraries
