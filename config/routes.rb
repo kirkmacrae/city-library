@@ -1,4 +1,5 @@
 Rails.application.routes.draw do    
+  resources :libraries
   devise_for :users
   
   get 'books/borrow', to: 'checkout_logs#borrow'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_171415) do
+ActiveRecord::Schema.define(version: 2021_01_28_231433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2020_12_30_171415) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "book_number"
+    t.bigint "library_id", null: false
+    t.index ["library_id"], name: "index_books_on_library_id"
   end
 
   create_table "checkout_logs", force: :cascade do |t|
@@ -37,6 +39,14 @@ ActiveRecord::Schema.define(version: 2020_12_30_171415) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_checkout_logs_on_book_id"
     t.index ["user_id"], name: "index_checkout_logs_on_user_id"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_171415) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "books", "libraries"
   add_foreign_key "checkout_logs", "books"
   add_foreign_key "checkout_logs", "users"
 end
