@@ -23,8 +23,8 @@ class BooksController < ApplicationController
     book_number,    
     count(book_number) as copies,
     count(log.book_id) as borrowed_copies,
-    library_id
-    from books as lib
+    lib.name
+    from books as book
     
     left join (
     select distinct
@@ -32,10 +32,14 @@ class BooksController < ApplicationController
     from checkout_logs
     where returned_date is null
     ) as log
-    ON lib.id = log.book_id
+    ON book.id = log.book_id
+
+    left join (select * from libraries) lib
+
+    ON lib.id = book.library_id
     
     group by 1,2,3,4,5,6,7,10
-    ORDER BY lib.title"
+    ORDER BY book.title"
     @books = ActiveRecord::Base.connection.execute(sql).values
   end
 
