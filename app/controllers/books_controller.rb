@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:listing]
   before_action :is_admin, except: [:listing, :my_books]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :add_copy]
+  before_action :set_libraries, only: [:new, :edit]
 
   # GET /books
   # GET /books.json
@@ -163,6 +164,9 @@ class BooksController < ApplicationController
   end
 
   private
+    def set_libraries
+      @libraries = Library.all
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])

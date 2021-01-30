@@ -28,12 +28,13 @@
         <td><%= book[9] %></td>
         <td><%= book[7] %></td>
         <td><%= book[7] - (book[8]? book[8] : 0) %></td>
+        <td>
         <% if current_user.try(:admin?) %>
-        <td><%= link_to 'Details',  book_listing_details_path(:book_number => book[6]) , class: 'btn btn-primary py-0 m-1 btn-sm' %>
+        <%= link_to 'Details',  book_listing_details_path(:book_number => book[6]) , class: 'btn btn-primary py-0 m-1 btn-sm' %>
         <% end %>
         <% if current_user && book[7] - (book[8]? book[8] : 0) > 0 %>           
         <%= link_to 'Borrow',  books_borrow_path(:book_number => book[6]) , class: 'btn btn-primary py-0 m-1 btn-sm' %>
-        <% else %>
+        <% elsif current_user %>
         <%= link_to 'Notify on Return', '', class: 'btn btn-secondary py-0 m-1 btn-sm' %>
         <% end %>  
         </td>      

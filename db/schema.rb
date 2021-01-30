@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_231433) do
+ActiveRecord::Schema.define(version: 2021_01_29_163232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 2021_01_28_231433) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "return_notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "book_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "library_id", null: false
+    t.index ["library_id"], name: "index_return_notifications_on_library_id"
+    t.index ["user_id"], name: "index_return_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -65,4 +75,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_231433) do
   add_foreign_key "books", "libraries"
   add_foreign_key "checkout_logs", "books"
   add_foreign_key "checkout_logs", "users"
+  add_foreign_key "return_notifications", "libraries"
+  add_foreign_key "return_notifications", "users"
 end

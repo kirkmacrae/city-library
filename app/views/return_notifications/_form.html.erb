@@ -1,0 +1,29 @@
+<%= form_with(model: return_notification, local: true) do |form| %>
+  <% if return_notification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(return_notification.errors.count, "error") %> prohibited this return_notification from being saved:</h2>
+
+      <ul>
+        <% return_notification.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<dl class="row">
+  <dt class="col-sm-1"><%= form.label :user_id %></dt>
+  <dd class="col-sm-11"><%= form.text_field :user_id %></dd>
+
+  <dt class="col-sm-1"><%= form.label :book_number %></dt>
+  <dd class="col-sm-11"><%= form.number_field :book_number %></dd>
+
+  <dt class="col-sm-1"><%= form.label :library_id %></dt>
+  <dd class="col-sm-11"><%= form.select :library_id, @libraries.collect { |library| [library.name, library.id]} %></dd> 
+</dl>
+
+<div class="actions">
+  <%= form.button button_text, class: 'btn btn-primary py-0 m-1 btn-sm'%>
+</div>
+
+<% end %>

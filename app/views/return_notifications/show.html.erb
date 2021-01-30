@@ -1,0 +1,22 @@
+<p>
+  <strong>User:</strong>
+  <%= @return_notification.user_id %>
+</p>
+
+<p>
+  <strong>Book number:</strong>
+  <%= @return_notification.book_number %>
+</p>
+
+<p>
+  <strong>Library:</strong>
+  <%= @return_notification.library.name %>
+</p>
+
+<p>
+  <strong>Created Date:</strong>
+  <%= @return_notification.created_at&.strftime("%B %d, %Y, %l:%M%p") %>
+</p>
+
+<%= link_to 'Edit', edit_return_notification_path(@return_notification), class: 'btn btn-primary py-0 btn-sm' %>
+<%= link_to 'Back', return_notifications_path, class: 'btn btn-primary py-0 btn-sm' %>

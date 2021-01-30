@@ -1,11 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Libraries</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Name</th>
       <th>Address</th>
       <th>Phone number</th>
@@ -16,7 +13,6 @@
   <tbody>
     <% @libraries.each do |library| %>
       <tr>
-        <td><%= library.id %></td>
         <td><%= library.name %></td>
         <td><%= library.address %></td>
         <td><%= library.phone_number %></td>

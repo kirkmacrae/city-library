@@ -1,0 +1,33 @@
+<h1>Return Notifications</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Book number</th>
+      <th>Library</th>
+      <th>Created Date</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @return_notifications.each do |return_notification| %>
+      <tr>
+        <td><%= return_notification.user_id %></td>
+        <td><%= return_notification.book_number %></td>
+        <td><%= return_notification.library.name %></td>
+        <td><%= return_notification.created_at&.strftime("%B %d, %Y, %l:%M%p") %></td>
+        <td>
+          <%= link_to 'Show', return_notification, class: 'btn btn-primary py-0 btn-sm' %>
+          <%= link_to 'Edit', edit_return_notification_path(return_notification), class: 'btn btn-primary py-0 btn-sm' %>
+          <%= link_to 'Destroy', return_notification, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger py-0 btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Return Notification', new_return_notification_path, class: 'btn btn-primary py-0 m-1 btn-sm' %>
