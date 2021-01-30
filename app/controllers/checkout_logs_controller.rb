@@ -28,7 +28,7 @@ class CheckoutLogsController < ApplicationController
   #refactor create code  
   def borrow
     #take one book that matches book_number and doesn't have a checkout_log record with a null returned_date (ie an available book of book_number)
-    @book = Book.where(book_number: params[:book_number]).where.not(id: CheckoutLog.where(returned_date: nil).pluck(:book_id)).take 
+    @book = Book.where(book_number: params[:book_number], library_id: params[:library_id]).where.not(id: CheckoutLog.where(returned_date: nil).pluck(:book_id)).take 
     
     if @book
       @checkout_log = CheckoutLog.new(:checkout_date => Time.now,
