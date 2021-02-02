@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :libraries
   devise_for :users
   
+  get 'books/notify', to: 'return_notifications#notify'
+  get 'books/end_notify', to: 'return_notifications#end_notify'
   get 'books/borrow', to: 'checkout_logs#borrow'
   get 'books/return', to: 'checkout_logs#return'
   get 'books/my_books'

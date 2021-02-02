@@ -21,11 +21,13 @@ class BooksController < ApplicationController
     subgenre,
     pages,
     publisher,
-    book_number,    
-    count(book_number) as copies,
+    book.book_number,    
+    count(book.book_number) as copies,
     count(log.book_id) as borrowed_copies,
     lib.name,
-    library_id
+    book.library_id,
+    notify.library_id,
+    notify.book_number
     from books as book
     
     left join (
@@ -37,10 +39,13 @@ class BooksController < ApplicationController
     ON book.id = log.book_id
 
     left join (select * from libraries) lib
-
     ON lib.id = book.library_id
-    
-    group by 1,2,3,4,5,6,7,10,11
+
+    left join (select * from return_notifications where user_id = #{ActiveRecord::Base.sanitize_sql(current_user.id)} ) notify
+    ON 
+    notify.book_number = book.book_number AND notify.library_id = lib.id
+	
+    group by 1,2,3,4,5,6,7,10,11,12,13
     ORDER BY book.title"
     @books = ActiveRecord::Base.connection.execute(sql).values
   end
@@ -65,7 +70,7 @@ class BooksController < ApplicationController
   #list books for current user that are borrowed
   def my_books
     #join books and checkoutlogs, where user_id = current_user.id and returned_date = null
-    @checkout_logs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})    
+    @checkout_logs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})  
   end
 
   # GET /books/1

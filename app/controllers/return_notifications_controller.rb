@@ -1,6 +1,6 @@
 class ReturnNotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_admin
+  before_action :is_admin, except: [:notify, :end_notify]
   before_action :set_return_notification, only: %w[ show edit update destroy ]
   before_action :set_libraries, only: [:new,:edit]
 
@@ -40,6 +40,24 @@ class ReturnNotificationsController < ApplicationController
     end
   end
 
+  # POST /return_notifications
+  # POST /return_notifications.json
+  def notify
+    @return_notification = ReturnNotification.new(:user_id => current_user.id,
+                                                  :book_number => params[:book_number],
+                                                  :library_id => params[:library_id])
+
+    respond_to do |format|
+      if @return_notification.save
+        format.html { redirect_to books_listing_path, notice: "Return notification was successfully created." }
+        format.json { render :show, status: :created, location: @return_notification }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @return_notification.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /return_notifications/1
   # PATCH/PUT /return_notifications/1.json
   def update
@@ -60,6 +78,17 @@ class ReturnNotificationsController < ApplicationController
     @return_notification.destroy
     respond_to do |format|
       format.html { redirect_to return_notifications_url, notice: "Return notification was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def end_notify
+    @return_notification = ReturnNotification.where(:user_id => current_user.id,
+                                                    :book_number => params[:book_number],
+                                                    :library_id => params[:library_id]).take
+    @return_notification.destroy
+    respond_to do |format|
+      format.html { redirect_to books_listing_path, notice: "Return notification was successfully destroyed." }
       format.json { head :no_content }
     end
   end
