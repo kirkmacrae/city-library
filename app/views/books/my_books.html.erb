@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Title</th>
       <th>Author</th>
       <th>Genre</th>
@@ -18,6 +19,7 @@
   <tbody>
     <% @checkout_logs.each do |checkout_log| %>
       <tr>
+        <td><%= checkout_log.book.id %></td>
         <td><%= checkout_log.book.title %></td>
         <td><%= checkout_log.book.author %></td>
         <td><%= checkout_log.book.genre %></td>

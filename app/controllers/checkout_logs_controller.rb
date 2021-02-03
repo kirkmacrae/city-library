@@ -56,19 +56,16 @@ class CheckoutLogsController < ApplicationController
     @checkout_log = CheckoutLog.find(params[:checkout_log_id])
     #verify correct user is trying to return this book 
     if @checkout_log.user_id == current_user.id
-      #send out all return notifications
-      #abort @checkout_log.inspect
-      @book = Book.where(id: @checkout_log.book_id).take
-      #abort @book.book_number.inspect
+      #send out all return notifications      
+      @book = Book.where(id: @checkout_log.book_id).take      
       @return_notifications = ReturnNotification.where(book_number: @book.book_number, library_id: @book.library_id)
-#abort @return_notifications.inspect
       @return_notifications.find_each do |notification|
-        user = User.where(:id => notification.user_id).take
-        #abort user.inspect
+        user = User.where(:id => notification.user_id).take        
         @book = Book.where(:book_number => notification.book_number, :library_id => notification.library_id).take        
-        #abort @book.inspect
         ReturnNotificationMailer.with(user: user, book: @book).return_notifications.deliver_now
-        #destroy returnnotification or flag it (add new column to database table)
+
+        #delete notification after e-mail sent. could later change table to flag as sent instead of deleting record
+        notification.destroy
       end
 
       respond_to do |format|

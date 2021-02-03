@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index    
-    @books = Book.paginate(page: params[:page]).order(:title)
+    @books = Book.paginate(page: params[:page]).order(:title, :library_id)
   end
 
   # a list of all unique books
@@ -74,8 +74,7 @@ class BooksController < ApplicationController
   end
 
   #list books for current user that are borrowed
-  def my_books
-    #join books and checkoutlogs, where user_id = current_user.id and returned_date = null
+  def my_books    
     @checkout_logs = CheckoutLog.joins(:book).where(checkout_logs: {user_id: current_user.id, returned_date: nil})  
   end
 
