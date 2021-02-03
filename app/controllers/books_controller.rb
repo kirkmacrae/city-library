@@ -52,7 +52,7 @@ class BooksController < ApplicationController
 
   def details
     #TODO: find cleaner way to build this    
-    @book = Book.where(book_number: params[:book_number]).take  
+    @book = Book.where(book_number: params[:book_number], library_id: params[:library_id]).take  
     sql = "SELECT DISTINCT ON (books.id)
     books.id, users.email, c.returned_date, c.due_date
     FROM checkout_logs c
@@ -60,7 +60,7 @@ class BooksController < ApplicationController
     ON c.book_id = books.id
     LEFT JOIN users
     on c.user_id = users.id
-    where books.book_number = #{ActiveRecord::Base.sanitize_sql(params[:book_number])}
+    where books.book_number = #{ActiveRecord::Base.sanitize_sql(params[:book_number])} and books.library_id = #{ActiveRecord::Base.sanitize_sql(params[:library_id])}
     ORDER BY books.id, c.returned_date DESC
     " 
 
