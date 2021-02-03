@@ -37,7 +37,7 @@
         <% else %>
         <%    if current_user && (!book[12] && !book[13]) %>
         <%= link_to 'Notify on Return', books_notify_path(:book_number => book[6], :library_id => book[10]), class: 'btn btn-secondary py-0 m-1 btn-sm' %>
-        <%    else %>
+        <%    elsif current_user %>
         Return Notification <%= link_to 'x', books_end_notify_path(:book_number => book[6], :library_id => book[10]), class: 'btn btn-danger py-0 btn-sm' %>
         <%    end %>
         <% end %>  

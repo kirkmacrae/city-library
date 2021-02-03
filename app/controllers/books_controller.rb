@@ -14,6 +14,12 @@ class BooksController < ApplicationController
   # GET /books/listing
   def listing
     #TODO: find cleaner way to build this
+    if current_user&.id
+      user_id = current_user.id
+    else
+      user_id = 0
+    end
+
     sql = "select
     title,
     author,
@@ -41,7 +47,7 @@ class BooksController < ApplicationController
     left join (select * from libraries) lib
     ON lib.id = book.library_id
 
-    left join (select * from return_notifications where user_id = #{ActiveRecord::Base.sanitize_sql(current_user.id)} ) notify
+    left join (select * from return_notifications where user_id = #{ActiveRecord::Base.sanitize_sql(user_id)} ) notify
     ON 
     notify.book_number = book.book_number AND notify.library_id = lib.id
 	
